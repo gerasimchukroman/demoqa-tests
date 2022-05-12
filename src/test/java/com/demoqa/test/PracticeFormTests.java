@@ -14,7 +14,6 @@ public class PracticeFormTests {
     @BeforeAll
     static void beforeAll() {
        Configuration.startMaximized = true;
-        Configuration.browserSize = "800x800";
     }
     @Test
     void fillFormTest(){
@@ -24,10 +23,6 @@ public class PracticeFormTests {
         String userEmail = "ab@ab.com";
         String userNumber = "8999999999";
         String currentAddress = "Pushkina street, Kolotuchkina home";
-
-
-        String value = "Female";
-
 
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue(firstName);
