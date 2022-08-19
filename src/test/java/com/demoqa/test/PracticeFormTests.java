@@ -1,6 +1,7 @@
 package com.demoqa.test;
 
 import com.codeborne.selenide.Configuration;
+import com.demoqa.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -11,65 +12,43 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.files.DownloadActions.click;
 
 public class PracticeFormTests {
+    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+
     @BeforeAll
     static void beforeAll() {
-       Configuration.startMaximized = true;
+        Configuration.baseUrl = "https://demoqa.com/";
+        Configuration.browserSize = "1920x1080";
     }
+
     @Test
-    void fillFormTest(){
+    void fillFormTest() {
 
-        String firstName = "Ivan";
-        String lastName = "Ivanov";
-        String userEmail = "ab@ab.com";
-        String userNumber = "8999999999";
-        String currentAddress = "Pushkina street, Kolotuchkina home";
+        registrationFormPage.openPage()
+                            .setFirstName("Ivan")
+                            .setLastName("Ivanov")
+                            .setUserEmail("ab@ab.com")
+                            .setGender("Female")
+                            .setUserNumber("8999999999")
+                            .setBirthDate("1","November", "1994")
+                            .setSubjects( "Maths")
+                            .setHobbies("Reading")
+                            .setUploadPicture( "img/23.png")
+                            .setCurrentAdress("Pushkina street, Kolotuchkina home")
+                            .setStateAndCity("NCR","Delhi" );
 
-        open("https://demoqa.com/automation-practice-form");
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(userEmail );
-        $("#genterWrapper").$(byText("Female")).click();
-        $("#userNumber").setValue(userNumber);
-
-        //Date of Birth
-       $("#dateOfBirthInput").click();
-       $(".react-datepicker__month-select").selectOption("November");
-       $(".react-datepicker__year-select").selectOption("1994");
-       $(".react-datepicker__day--001:not(.react-datepicker__day--outside-month)").click();
-
-        //Subjects
-        $("#subjectsInput").setValue("Maths").pressEnter();
-
-        //Hobbies
-        $("#hobbiesWrapper").$(byText("Reading")).click();
-
-        //Picture
-        $("#uploadPicture").uploadFromClasspath("img/23.png");
-
-
-        $("#currentAddress").setValue(currentAddress);
-
-        //State and city
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
-
-       // $("#submit").scrollIntoView(true);
         $("input").pressEnter();
 
-
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text(firstName),
-                text(lastName),
-                text(userEmail),
-                text(userNumber),
+        $(".table-responsive").shouldHave(text("Ivan"),
+                text("Ivanov"),
+                text("Ivanov"),
+                text("8999999999"),
                 text("Female"),
                 text("01 November,1994"),
                 text("Maths"),
                 text("Reading"),
                 text("23.png"),
-                text(currentAddress),
+                text("Pushkina street, Kolotuchkina home"),
                 text("NCR Delhi"));
     }
 }
