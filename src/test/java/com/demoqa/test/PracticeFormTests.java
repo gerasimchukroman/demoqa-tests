@@ -5,11 +5,6 @@ import com.demoqa.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.files.DownloadActions.click;
 
 public class PracticeFormTests {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
@@ -36,19 +31,20 @@ public class PracticeFormTests {
                             .setCurrentAdress("Pushkina street, Kolotuchkina home")
                             .setStateAndCity("NCR","Delhi" );
 
-        $("input").pressEnter();
+        registrationFormPage.input();
 
-        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Ivan"),
-                text("Ivanov"),
-                text("Ivanov"),
-                text("8999999999"),
-                text("Female"),
-                text("01 November,1994"),
-                text("Maths"),
-                text("Reading"),
-                text("23.png"),
-                text("Pushkina street, Kolotuchkina home"),
-                text("NCR Delhi"));
+        // examination
+
+        registrationFormPage.modalTitleInput("Thanks for submitting the form");
+        registrationFormPage.tableResponsive("Ivan");
+        registrationFormPage.tableResponsive("Ivanov");
+        registrationFormPage.tableResponsive("8999999999");
+        registrationFormPage.tableResponsive("Female");
+        registrationFormPage.tableResponsive("01 November,1994");
+        registrationFormPage.tableResponsive("Reading");
+        registrationFormPage.tableResponsive("23.png");
+        registrationFormPage.tableResponsive("Pushkina street, Kolotuchkina home");
+        registrationFormPage.tableResponsive("NCR Delhi");
+
     }
 }

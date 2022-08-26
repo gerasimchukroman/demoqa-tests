@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;
 import com.demoqa.pages.components.StateAndCityComponent;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -21,7 +22,10 @@ public class RegistrationFormPage {
             subjectsInput = $("#subjectsInput"),
             hobbiesInput = $("#hobbiesWrapper"),
             uploadPictureInput = $("#uploadPicture"),
-            currentAdressInput = $("#currentAddress");
+            currentAdressInput = $("#currentAddress"),
+            inputInput = $("input"),
+            modalTitleInput = $(".modal-title"),
+            tableResponsiveInput = $(".table-responsive");
 
 
     public RegistrationFormPage openPage() {
@@ -77,6 +81,16 @@ public class RegistrationFormPage {
     }
     public RegistrationFormPage setStateAndCity (String state, String city) {
         stateAndCityComponent.stateAndCity(state, city);
+        return this;
+    }
+    public void input(){
+        inputInput.pressEnter();
+    }
+    public void modalTitleInput (String value){
+        modalTitleInput.shouldHave(text(value));
+    }
+    public RegistrationFormPage tableResponsive(String value){
+        tableResponsiveInput.shouldHave(text(value));
         return this;
     }
 
