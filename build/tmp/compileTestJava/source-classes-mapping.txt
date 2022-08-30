@@ -1,2 +1,12 @@
+com/demoqa/test/TestData.java
+ com.demoqa.test.TestData
+com/demoqa/pages/RegistrationFormPage.java
+ com.demoqa.pages.RegistrationFormPage
+com/demoqa/pages/components/StateAndCityComponent.java
+ com.demoqa.pages.components.StateAndCityComponent
+com/demoqa/pages/components/CalendarComponent.java
+ com.demoqa.pages.components.CalendarComponent
+com/demoqa/test/TestBase.java
+ com.demoqa.test.TestBase
 com/demoqa/test/PracticeFormTests.java
  com.demoqa.test.PracticeFormTests
